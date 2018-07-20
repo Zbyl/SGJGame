@@ -16,8 +16,8 @@ public abstract class Saver : MonoBehaviour
     {
         sceneController = FindObjectOfType<SceneController>();
 
-        if(!sceneController)
-            throw new UnityException("Scene Controller could not be found, ensure that it exists in the Persistent scene.");
+        //if(!sceneController)
+        //    throw new UnityException("Scene Controller could not be found, ensure that it exists in the Persistent scene.");
         
         key = SetKey ();
     }
@@ -25,15 +25,21 @@ public abstract class Saver : MonoBehaviour
 
     private void OnEnable()
     {
-        sceneController.Saving += Save;
-        sceneController.Loading += Load;
+        if (sceneController)
+        {
+            sceneController.Saving += Save;
+            sceneController.Loading += Load;
+        }
     }
 
 
     private void OnDisable()
     {
-        sceneController.Saving -= Save;
-        sceneController.Loading -= Load;
+        if (sceneController)
+        {
+            sceneController.Saving -= Save;
+            sceneController.Loading -= Load;
+        }
     }
 
 

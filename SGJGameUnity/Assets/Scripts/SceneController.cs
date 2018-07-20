@@ -7,6 +7,9 @@ using System.Text;
 
 public class SceneController : MonoBehaviour
 {
+    public static bool GameIsPaused = true;
+    public static bool ShowSaveLoadMenus = false;
+
     public event Action Saving;
     public event Action Loading;
 
@@ -29,7 +32,8 @@ public class SceneController : MonoBehaviour
 
         StartCoroutine(FadeAndSwitchScenes(newGameSceneName, () => {
             playerSaveData.Reset();
-            IngameMenu.GameIsPaused = false;
+            GameIsPaused = false;
+            ShowSaveLoadMenus = true;
         }));
     }
 
@@ -43,7 +47,8 @@ public class SceneController : MonoBehaviour
 
         StartCoroutine(FadeAndSwitchScenes(startingSceneName, () => {
             playerSaveData.Reset();
-            IngameMenu.GameIsPaused = false;
+            GameIsPaused = true;
+            ShowSaveLoadMenus = false;
         }));
     }
 
@@ -70,7 +75,8 @@ public class SceneController : MonoBehaviour
 
         StartCoroutine(FadeAndSwitchScenes(sceneName, () => {
             playerSaveData.Assign(saveData);
-            IngameMenu.GameIsPaused = false;
+            GameIsPaused = false;
+            ShowSaveLoadMenus = true;
         }));
     }
 
@@ -81,7 +87,8 @@ public class SceneController : MonoBehaviour
 
         string json = JsonUtility.ToJson(playerSaveData, true);
         File.WriteAllText(Application.persistentDataPath + "/gamesave.save", json);
-        IngameMenu.GameIsPaused = false;
+        GameIsPaused = false;
+        ShowSaveLoadMenus = true;
     }
 
     private bool isFading;

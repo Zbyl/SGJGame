@@ -4,97 +4,187 @@ using UnityEngine;
 
 public class RobinHoodController : MonoBehaviour {
 
-    // Use this for initialization
-    void Start () {
-        animator = GetComponent<Animator>();
+    Animator feetAnimator;
+    Animator bodyAnimator;
+
+    private new Rigidbody2D rigidbody;
+    public float strafeMultiplier = 1f;
+    public float moveMultiplier = 1f;
+    public float strafeDisablesMoveTreshold = 0.05f;
+    public float feetAnimSpeedMultiplier = 0.1f;
+    public float bodyAnimSpeedMultiplier = 0.1f;
+    public float lockStrafeTreshold = 0.1f;
+    public float directionLerpFactor = 0.5f;
+    public float maxSpeed = 50.0f;
+
+    private Vector3 targetDirection = Vector3.right;
+    private Vector3 currentDirection = Vector3.right;
+
+    public enum WeaponKind
+    {
+        Rifle,
+        Shotgun,
+        Pistol,
+        Knife,
     }
 
-    // Require the rocket to be a rigidbody.
-    // This way we the user can not assign a prefab without rigidbody
-    public Transform arrowStart;
-    public Rigidbody2D rocket;
-    public float speed = 10f;
-    public float topSpeed = 10f;
+    private float lastShot = 0.0f;
+    public float[] weaponDelays = { 0.5f, 1.0f, 0.3f, 1.0f };
+    public Transform[] weaponProjectileSources = { null, null, null, null };
+    public GameObject[] weaponProjectiles = { null, null, null, null };
 
-    Animator animator;
+    public string[] weaponIdleAnims = { "RifleIdle", "ShotgunIdle", "PistolIdle", "KnifeIdle" };
+    public string[] weaponWalkAnims = { "RifleWalk", "ShotgunWalk", "PistolWalk", "KnifeWalk" };
+    public string[] weaponShootAnims = { "RifleShoot", "ShotgunShoot", "PistolShoot", "KnifeShoot" };
+    public string[] weaponReloadAnims = { "RifleReload", "ShotgunReload", "PistolReloade", null };
 
-    private Vector3 direction = Vector3.right;
-    private Vector3 shootDir;
-    private int d = 0;
+    public float knifeRadius = 1.0f;
+    public float knifeDamage = 50.0f;
 
-    private bool allowShoot = true;
+    public float bulletSpeed = 50.0f;
 
-    void FireRocket()
+    public static int destroyablesMask = 512;
+    public static int enemiesMask = 1024;
+    public static int playerMask = 2048;
+    public static int hitablesMask = enemiesMask | destroyablesMask;
+
+    public WeaponKind currentWeapon = WeaponKind.Rifle;
+
+    private void Awake()
     {
-        var rot = Quaternion.FromToRotation(-arrowStart.right, shootDir);
-        Rigidbody2D rocketClone = (Rigidbody2D)Instantiate(rocket, arrowStart.position, rot);
-        rocketClone.velocity = shootDir * speed;
+    }
 
-        // You can also access other components / scripts of the clone
-        //rocketClone.GetComponent<MyRocketScript>().DoSomething();
+    // Use this for initialization
+    void Start()
+    {
+        rigidbody = GetComponent<Rigidbody2D>();
+        feetAnimator = transform.Find("Feet").GetComponent<Animator>();
+        bodyAnimator = transform.Find("Body").GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
-            //FireRocket();
-            shootDir = direction;
-            allowShoot = true;
-            Debug.Log("BowLeft");
-            animator.Play("BowLeft");
+            ShootWeapon();
         }
     }
 
     // Physics in FixedUpdate
     void FixedUpdate()
     {
-        float moveH = Input.GetAxis("Horizontal");
-        float moveV = Input.GetAxis("Vertical");
-        var nd = (transform.right * moveH + transform.up * moveV).normalized;
-        if (nd.magnitude > 0.01f)
-            direction = nd;
-        GetComponent<Rigidbody2D>().velocity = transform.right * moveH * topSpeed + transform.up * moveV * topSpeed;
+        float moveX = Input.GetAxis("Horizontal");
+        float moveY = Input.GetAxis("Vertical");
+        float strafeX = Input.GetAxis("StrafeX");
+        float strafeY = Input.GetAxis("StrafeY");
+        float lockStrafeValue = Input.GetAxis("LockStrafe");
+        bool lockStrafe = (lockStrafeValue > lockStrafeTreshold) || (lockStrafeValue < -lockStrafeTreshold);
 
-        animator.SetFloat("Speed", Mathf.Sqrt(moveH * moveH + moveV * moveV));
+        //Debug.Log(string.Format("lockStrafeValue={0} lockStrafe={1}", lockStrafeValue, lockStrafe));
+        //Debug.Log(string.Format("moveX={0} moveY={1} strafeX={2} strafeY={3}", moveX, moveY, strafeX, strafeY));
 
-        var oldD = d;
-        if (Mathf.Abs(moveH) > Mathf.Abs(moveV))
-            if (moveH > 0)
-                d = 0;
-            else
-                d = 2;
-        else
-            if (moveV < 0)
-                d = 1;
-            else
-                d = 3;
-
-        if (d != oldD)
+        var moveDir = (Vector3.right * moveX + Vector3.up * moveY);
+        if (!lockStrafe)
         {
-            if (d == 0)
-                animator.Play("WalkRight");
-            else
-            if (d == 1)
-                animator.Play("WalkDown");
-            else
-            if (d == 2)
-                animator.Play("WalkLeft");
-            else
-            if (d == 3)
-                animator.Play("WalkUp");
+            if (moveDir.magnitude > 0.01f)
+            {
+                targetDirection = moveDir.normalized;
+            }
+
+            currentDirection = Vector3.Slerp(currentDirection, targetDirection, directionLerpFactor);
         }
 
-        animator.SetInteger("Direction", d);
+        // Update sprite rotation
+        var upDir = Vector3.Cross(Vector3.forward, currentDirection);
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, upDir);
+
+        var move = Vector3.zero;
+
+        // When strafing move control doesn't contribute to move, only to direction.
+        var strafeDir = (Vector3.right * strafeX + Vector3.up * strafeY);
+
+        if (strafeDir.magnitude > strafeDisablesMoveTreshold)
+        {
+            //move = strafeDir * strafeMultiplier;
+        }
+        else
+        {
+            //move = moveDir * moveMultiplier;
+        }
+        move = moveDir * moveMultiplier;
+        var strafe = strafeDir * strafeMultiplier;
+
+        var moveAlongDirection = Vector3.Dot(move, currentDirection) * currentDirection;
+        var moveSideways = move - moveAlongDirection;
+        var strafing = moveSideways.sqrMagnitude > moveAlongDirection.sqrMagnitude;
+        //move += moveSideways;
+
+        //Debug.Log(string.Format("move={0} moveAlongDirection={1} moveSideways={2}", move, moveAlongDirection, moveSideways));
+
+        feetAnimator.SetFloat("Speed", rigidbody.velocity.magnitude * feetAnimSpeedMultiplier);
+        bodyAnimator.SetFloat("Speed", rigidbody.velocity.magnitude * bodyAnimSpeedMultiplier);
+
+        feetAnimator.SetBool("Strafing", strafing);
+        bodyAnimator.SetBool("Moving", (rigidbody.velocity.magnitude > 1f));
+
+        rigidbody.AddForce(move);
+        if (rigidbody.velocity.magnitude > maxSpeed)
+        {
+            rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+        }
     }
 
-    public void ShootArrow(string s)
+    public void ShootWeapon()
     {
-        Debug.Log("PrintEvent: " + s + " called at: " + Time.time);
-        if (allowShoot)
+        var weaponDelay = weaponDelays[(int)currentWeapon];
+        if (Time.time - lastShot < weaponDelay)
         {
-            allowShoot = false;
-            FireRocket();
+            return;
+        }
+        lastShot = Time.time;
+
+        var shootAnim = weaponShootAnims[(int)currentWeapon];
+        bodyAnimator.Play(shootAnim);
+    }
+
+    public void Shoot()
+    {
+        var weaponProjectile = weaponProjectiles[(int)currentWeapon];
+        var projectileSource = weaponProjectileSources[(int)currentWeapon];
+
+        if (currentWeapon == WeaponKind.Knife)
+        {
+            // Hit all enemies in radius.
+            var colliders = Physics2D.OverlapCircleAll(projectileSource.position, knifeRadius, hitablesMask);
+            foreach (var collider in colliders)
+            {
+                var targetRadius = collider.bounds.size.x / 2;
+                var dirToSource = projectileSource.position - collider.transform.position;
+                var hitPosition = collider.transform.position + dirToSource.normalized * targetRadius;
+
+                var hitTarget = collider.GetComponent<Hitable>();
+                hitTarget.Hit(knifeDamage, hitPosition, dirToSource.normalized);
+
+                // projectile weapon
+                var rot = Quaternion.FromToRotation(projectileSource.right, currentDirection);
+                GameObject projectileClone = Instantiate(weaponProjectile, hitPosition, rot);
+            }
+            return;
+        }
+
+        if (currentWeapon == WeaponKind.Shotgun)
+        {
+            // raycast weapon
+        }
+        else
+        {
+            // projectile weapon
+            var rot = Quaternion.FromToRotation(projectileSource.right, currentDirection);
+            Rigidbody2D projectileClone = Instantiate(weaponProjectile, projectileSource.position, rot).GetComponent<Rigidbody2D>();
+            projectileClone.velocity = currentDirection * bulletSpeed;
+
+            // You can also access other components / scripts of the clone
+            //arrowClone.GetComponent<MyRocketScript>().DoSomething();
         }
     }
 }

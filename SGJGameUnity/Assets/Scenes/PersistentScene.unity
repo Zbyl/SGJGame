@@ -178,6 +178,7 @@ RectTransform:
   - {fileID: 580164391}
   - {fileID: 1501572634}
   - {fileID: 765737402}
+  - {fileID: 1788721081}
   m_Father: {fileID: 1132896997}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -272,6 +273,7 @@ GameObject:
   - component: {fileID: 221570200}
   - component: {fileID: 221570199}
   - component: {fileID: 221570198}
+  - component: {fileID: 221570201}
   m_Layer: 5
   m_Name: NewGameButton
   m_TagString: Untagged
@@ -384,6 +386,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 221570196}
   m_CullTransparentMesh: 0
+--- !u!114 &221570201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 221570196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bf59ab109a3824fad852227de83e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedMarker: {fileID: 1788721081}
+  horizontalOffset: -155.3
+  verticalOffset: -4.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +488,7 @@ GameObject:
   - component: {fileID: 580164394}
   - component: {fileID: 580164393}
   - component: {fileID: 580164392}
+  - component: {fileID: 580164395}
   m_Layer: 5
   m_Name: SaveGameButton
   m_TagString: Untagged
@@ -584,6 +601,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 580164390}
   m_CullTransparentMesh: 0
+--- !u!114 &580164395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 580164390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bf59ab109a3824fad852227de83e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedMarker: {fileID: 1788721081}
+  horizontalOffset: -155.3
+  verticalOffset: -4.5
 --- !u!1 &765737401
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +626,7 @@ GameObject:
   - component: {fileID: 765737405}
   - component: {fileID: 765737404}
   - component: {fileID: 765737403}
+  - component: {fileID: 765737406}
   m_Layer: 5
   m_Name: EndGameButton
   m_TagString: Untagged
@@ -707,6 +739,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 765737401}
   m_CullTransparentMesh: 0
+--- !u!114 &765737406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 765737401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bf59ab109a3824fad852227de83e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedMarker: {fileID: 1788721081}
+  horizontalOffset: -155.3
+  verticalOffset: -4.5
 --- !u!1 &856799733
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,6 +1029,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 44847316}
+  saveMenu: {fileID: 580164390}
+  loadMenu: {fileID: 1501572633}
 --- !u!1 &1262071179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,6 +1237,7 @@ GameObject:
   - component: {fileID: 1501572637}
   - component: {fileID: 1501572636}
   - component: {fileID: 1501572635}
+  - component: {fileID: 1501572638}
   m_Layer: 5
   m_Name: LoadGameButton
   m_TagString: Untagged
@@ -1301,6 +1350,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1501572633}
   m_CullTransparentMesh: 0
+--- !u!114 &1501572638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1501572633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bf59ab109a3824fad852227de83e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedMarker: {fileID: 1788721081}
+  horizontalOffset: -155.3
+  verticalOffset: -4.5
 --- !u!1 &1520027754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,3 +1526,72 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &1788721080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1788721081}
+  - component: {fileID: 1788721083}
+  - component: {fileID: 1788721082}
+  m_Layer: 5
+  m_Name: SelectedMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1788721081
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1788721080}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 44847319}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -140.3, y: 130.5}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1788721082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1788721080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300334, guid: 20b63fcacddec904796a4fcbb0c07ad6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1788721083
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1788721080}
+  m_CullTransparentMesh: 0

@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class IngameMenu : MonoBehaviour {
 
-    public static bool GameIsPaused = false;
-
     public GameObject pauseMenu;
+    public GameObject saveMenu;
+    public GameObject loadMenu;
 
-    // Use this for initialization
-    void Awake () {
-        pauseMenu.SetActive(GameIsPaused);
+    private SceneController sceneController;
+
+    private void Awake()
+    {
+        sceneController = FindObjectOfType<SceneController>();
+
+        if (!sceneController)
+            throw new UnityException("Scene Controller could not be found, ensure that it exists in the Persistent scene.");
+
+        pauseMenu.SetActive(SceneController.GameIsPaused);
     }
 
     // Update is called once per frame
@@ -18,10 +25,10 @@ public class IngameMenu : MonoBehaviour {
         if (Input.GetButtonDown("Menu"))
         {
             Debug.Log("Menu pressed");
-            GameIsPaused = !GameIsPaused;
+            SceneController.GameIsPaused = !SceneController.GameIsPaused;
         }
 
-        if (GameIsPaused)
+        if (SceneController.GameIsPaused)
         {
             pauseMenu.SetActive(true);
             //Time.timeScale = 0.0f;
@@ -30,6 +37,17 @@ public class IngameMenu : MonoBehaviour {
         {
             pauseMenu.SetActive(false);
             //Time.timeScale = 1.0f;
+        }
+
+        if (SceneController.ShowSaveLoadMenus)
+        {
+            saveMenu.SetActive(true);
+            loadMenu.SetActive(true);
+        }
+        else
+        {
+            saveMenu.SetActive(false);
+            loadMenu.SetActive(false);
         }
     }
 }
