@@ -24,12 +24,5 @@ public class PlayerHitable : Hitable
         //gameObject.GetComponent<Collider2D>().enabled = false;
         bodyAnimator.Play("DeadAnimation");
         feetAnimator.Play("FeetIdleAnimation");
-        Invoke("endGame", 2.0f);
-    }
-
-    private void endGame()
-    {
-        SceneController.GameIsPaused = true;
-        SceneController.ShowSaveLoadMenus = false;
     }
 }

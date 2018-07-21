@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Hitable : MonoBehaviour {
 
+    public enum HitableType
+    {
+        Player,
+        Enemy,
+        Object,
+        Target,
+    }
+
+    public HitableType hitableType;
+
     public float health = 100.0f;
 
     public GameObject[] injuryEffects = { };
@@ -17,6 +27,9 @@ public class Hitable : MonoBehaviour {
 
     public float destroyDelay = 0.0f;
 
+    public ScoresScript scores;
+
+
     public struct HitResult
     {
         public HitResult(bool effectShown, bool soundPlayed)
@@ -29,15 +42,26 @@ public class Hitable : MonoBehaviour {
         public bool soundPlayed;
     }
 
+
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Awake () {
+        scores = GameObject.FindGameObjectWithTag("Scores").GetComponent<ScoresScript>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    void OnEnable()
+    {
+        scores.RegisterHitable(hitableType, true);
+    }
+
+    void OnDisable()
+    {
+        scores.RegisterHitable(hitableType, false);
+    }
 
     public HitResult Hit(float damage, Vector3 contactPoint, Vector3 contactNormal)
     {

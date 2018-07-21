@@ -27,6 +27,8 @@ public class EnemySoldierController : SoldierController
     bool walkToTarget = false;
     Vector3 walkTarget;
 
+    public ScoresScript scores;
+
     void walkToSetup(Vector3 target)
     {
         walkToTarget = true;
@@ -151,6 +153,7 @@ public class EnemySoldierController : SoldierController
     new void Start()
     {
         base.Start();
+        scores = GameObject.FindGameObjectWithTag("Scores").GetComponent<ScoresScript>();
     }
 
     void OnEnable()
@@ -160,13 +163,25 @@ public class EnemySoldierController : SoldierController
 
     void OnDisable()
     {
-        StopCoroutine(logicCoroutine);
-        logicCoroutine = null;
+        StopAi();
+    }
+
+    void StopAi()
+    {
+        if (logicCoroutine != null)
+        {
+            StopCoroutine(logicCoroutine);
+            logicCoroutine = null;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (scores.GameEnded())
+        {
+            StopAi();
+        }
         UpdateAnims();
         Debug.DrawLine(transform.position, walkTarget, Color.yellow);
     }

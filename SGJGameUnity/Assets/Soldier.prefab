@@ -245,17 +245,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d316af1c6d42df84f824e275301be3b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
+  hitableType: 0
+  health: 100
   injuryEffects:
   - {fileID: 1608249441424900, guid: d6fa84fc7f092244b8d6f2e17c6777ee, type: 2}
-  injurySounds: []
+  injurySounds:
+  - {fileID: 8300000, guid: 7ddffbc0eb0223d4a888b25094bcbb86, type: 3}
+  - {fileID: 8300000, guid: ca76b115033d84d4c80981b7e4142610, type: 3}
   dyingEffects:
   - {fileID: 1672776465992670, guid: 20418fe5df7f31a47b96712862db25a1, type: 2}
-  dyingSounds: []
+  dyingSounds:
+  - {fileID: 8300000, guid: a21ff04d904b8bf4e8152fe4ecc9f148, type: 3}
   deadEffects:
   - {fileID: 1608249441424900, guid: d6fa84fc7f092244b8d6f2e17c6777ee, type: 2}
   deadSounds: []
   destroyDelay: 0
+  scores: {fileID: 0}
 --- !u!114 &114843995461470340
 MonoBehaviour:
   m_ObjectHideFlags: 1
