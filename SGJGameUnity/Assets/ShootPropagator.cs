@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ShootPropagator : MonoBehaviour {
 
-    private RobinHoodController robinHoodController;
+    private SoldierController soldierController;
 
 	// Use this for initialization
 	void Start () {
-        robinHoodController = gameObject.GetComponentInParent<RobinHoodController>();
+        soldierController = gameObject.GetComponentInParent<SoldierController>();
     }
 	
 	// Update is called once per frame
@@ -16,9 +16,15 @@ public class ShootPropagator : MonoBehaviour {
 		
 	}
 
-    void Shoot()
+    public void Shoot()
     {
         //Debug.Log("Propagating shot.");
-        robinHoodController.Shoot();
+        soldierController.Shoot();
+    }
+
+    void Finished()
+    {
+        //Debug.Log("Propagating shot.");
+        soldierController.ShootFinished();
     }
 }

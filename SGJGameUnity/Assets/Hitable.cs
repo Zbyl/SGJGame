@@ -5,9 +5,29 @@ using UnityEngine;
 public class Hitable : MonoBehaviour {
 
     public float health = 100.0f;
-    public GameObject[] injuries = {};
-    public GameObject[] explosions = {};
-    public float destroyDelay = 0.5f;
+
+    public GameObject[] injuryEffects = { };
+    public AudioClip[] injurySounds = { };
+
+    public GameObject[] dyingEffects = { };
+    public AudioClip[] dyingSounds = { };
+
+    public GameObject[] deadEffects = { };
+    public AudioClip[] deadSounds = { };
+
+    public float destroyDelay = 0.0f;
+
+    public struct HitResult
+    {
+        public HitResult(bool effectShown, bool soundPlayed)
+        {
+            this.effectShown = effectShown;
+            this.soundPlayed = soundPlayed;
+        }
+
+        public bool effectShown;
+        public bool soundPlayed;
+    }
 
     // Use this for initialization
     void Start () {
@@ -19,38 +39,39 @@ public class Hitable : MonoBehaviour {
 		
 	}
 
-    public void Hit(float damage, Vector3 contactPoint, Vector3 contactNormal)
+    public HitResult Hit(float damage, Vector3 contactPoint, Vector3 contactNormal)
     {
         if (health <= 0)
         {
-            return;
+            var effectShown = Weapons.createRandomObject(deadEffects, contactPoint, contactNormal);
+            var soundPlayed = Weapons.playRandomSound(deadSounds, contactPoint);
+
+            return new HitResult(effectShown, soundPlayed);
         }
 
         //Debug.Log(string.Format("damage={0}", damage));
 
-        if (injuries.Length > 0)
-        {
-            var injuryIdx = Random.Range(0, injuries.Length);
-            var injury = injuries[injuryIdx];
-
-            var rot = Quaternion.FromToRotation(Vector3.right, contactNormal);
-            GameObject injuryClone = Instantiate(injury, contactPoint, rot);
-        }
-
         health -= damage;
         if (health > 0)
         {
-            return;
-        }
+            var effectShown = Weapons.createRandomObject(injuryEffects, contactPoint, contactNormal);
+            var soundPlayed = Weapons.playRandomSound(injurySounds, contactPoint);
 
-        if (explosions.Length > 0)
+            return new HitResult(effectShown, soundPlayed);
+        }
+        else
         {
-            Debug.Log("Instantiating explosion.");
-            var explosionIdx = Random.Range(0, explosions.Length);
-            var explosion = explosions[explosionIdx];
+            var effectShown = Weapons.createRandomObject(dyingEffects, transform.position, Weapons.randomDirection());
+            var soundPlayed = Weapons.playRandomSound(dyingSounds, transform.position);
 
-            Instantiate(explosion, transform.position, Quaternion.identity);
-            Destroy(gameObject, destroyDelay);
+            onDead();
+
+            return new HitResult(effectShown, soundPlayed);
         }
+    }
+
+    protected virtual void onDead()
+    {
+        Destroy(gameObject, destroyDelay);
     }
 }
