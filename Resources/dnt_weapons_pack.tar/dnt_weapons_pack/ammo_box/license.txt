@@ -1,0 +1,3 @@
+*
+   author: farrer (DNTeam)
+   license: GPLv3+, CC-BY-SAv3

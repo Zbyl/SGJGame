@@ -7,8 +7,13 @@ using System.Text;
 
 public class SceneController : MonoBehaviour
 {
+    public static SceneController instance;
+
+    public static bool SelectInGameMenu = true;
     public static bool GameIsPaused = true;
+    public static bool ShowNewMenu = true;
     public static bool ShowSaveLoadMenus = false;
+    public static bool ShowEndMenu = true;
 
     public event Action Saving;
     public event Action Loading;
@@ -19,8 +24,20 @@ public class SceneController : MonoBehaviour
     public CanvasGroup faderCanvasGroup;
     public float fadeDuration = 1f;
     public string startingSceneName = "MainMenu";
-    public string newGameSceneName = "GameStart";
+    public string[] gameLevels = { "GameStart", "HardLevel", "Congratulations" };
+    private string currentSceneName;
     public SaveData playerSaveData;
+
+    private bool isFading;
+
+    public static void ShowPauseMenu(bool showNew, bool showSaveLoad, bool showEnd)
+    {
+        SelectInGameMenu = true;
+        GameIsPaused = true;
+        ShowNewMenu = true;// showNew;
+        ShowSaveLoadMenus = false; // showSaveLoad;
+        ShowEndMenu = showEnd;
+    }
 
     public void NewGame()
     {
@@ -30,10 +47,10 @@ public class SceneController : MonoBehaviour
             return;
         }
 
-        StartCoroutine(FadeAndSwitchScenes(newGameSceneName, () => {
+        StartCoroutine(FadeAndSwitchScenes(gameLevels[0], () => {
             playerSaveData.Reset();
+            ShowPauseMenu(true, true, true);
             GameIsPaused = false;
-            ShowSaveLoadMenus = true;
         }));
     }
 
@@ -47,8 +64,7 @@ public class SceneController : MonoBehaviour
 
         StartCoroutine(FadeAndSwitchScenes(startingSceneName, () => {
             playerSaveData.Reset();
-            GameIsPaused = true;
-            ShowSaveLoadMenus = false;
+            ShowPauseMenu(true, false, true);
         }));
     }
 
@@ -70,13 +86,13 @@ public class SceneController : MonoBehaviour
         var json = File.ReadAllText(Application.persistentDataPath + "/gamesave.save");
         var saveData = JsonUtility.FromJson<SaveData>(json);
 
-        string sceneName = newGameSceneName;
+        string sceneName = gameLevels[0];
         saveData.Load("currentScene", ref sceneName);
 
         StartCoroutine(FadeAndSwitchScenes(sceneName, () => {
             playerSaveData.Assign(saveData);
+            ShowPauseMenu(true, true, true);
             GameIsPaused = false;
-            ShowSaveLoadMenus = true;
         }));
     }
 
@@ -87,11 +103,35 @@ public class SceneController : MonoBehaviour
 
         string json = JsonUtility.ToJson(playerSaveData, true);
         File.WriteAllText(Application.persistentDataPath + "/gamesave.save", json);
+        ShowPauseMenu(true, true, true);
         GameIsPaused = false;
-        ShowSaveLoadMenus = true;
     }
 
-    private bool isFading;
+    public void NextLevel()
+    {
+        for (var i = 0; i < gameLevels.Length - 1; ++i)
+        {
+            if (gameLevels[i] == currentSceneName)
+            {
+                var levelName = gameLevels[i + 1];
+                Debug.Log("Loading level: " + levelName);
+                FadeAndLoadScene(levelName);
+                return;
+            }
+        }
+        Debug.Log("There is no next level to load.");
+    }
+
+    void Awake()
+    {
+        if (SceneController.instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        SceneController.instance = this;
+    }
+
     private IEnumerator Start ()
     {
         faderCanvasGroup.alpha = 1f;
@@ -133,6 +173,7 @@ public class SceneController : MonoBehaviour
     }
     private IEnumerator LoadSceneAndSetActive (string sceneName)
     {
+        currentSceneName = sceneName;
         playerSaveData.Save("currentScene", sceneName);
         yield return SceneManager.LoadSceneAsync (sceneName, LoadSceneMode.Additive);
         Scene newlyLoadedScene = SceneManager.GetSceneAt (SceneManager.sceneCount - 1);

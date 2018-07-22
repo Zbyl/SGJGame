@@ -9,6 +9,14 @@ public class HudScript : MonoBehaviour {
     private Text ammoClipText;
     private Text ammoTotalText;
 
+    private Image knifeImage;
+    private Image pistolImage;
+    private Image rifleImage;
+    private Image shotgunImage;
+
+    public Color gunOn;
+    public Color gunOff;
+
     PlayerSoldierController playerController;
     Hitable playerHitable;
 
@@ -20,6 +28,11 @@ public class HudScript : MonoBehaviour {
         healthText = transform.Find("HealthText").GetComponent<Text>();
         ammoClipText = transform.Find("AmmoClip").GetComponent<Text>();
         ammoTotalText = transform.Find("AmmoTotal").GetComponent<Text>();
+
+        knifeImage = transform.Find("Knife").GetComponent<Image>();
+        pistolImage = transform.Find("Pistol").GetComponent<Image>();
+        rifleImage = transform.Find("Rifle").GetComponent<Image>();
+        shotgunImage = transform.Find("Shotgun").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -36,5 +49,18 @@ public class HudScript : MonoBehaviour {
         var weapon = playerController.currentWeapon;
         ammoClipText.text = playerController.weaponMagazineFills[(int)weapon].ToString();
         ammoTotalText.text = playerController.weaponBulletsOwned[(int)weapon].ToString();
+
+        knifeImage.color = gunOff;
+        pistolImage.color = gunOff;
+        rifleImage.color = gunOff;
+        shotgunImage.color = gunOff;
+
+        switch (weapon)
+        {
+            case Weapons.WeaponKind.Knife: knifeImage.color = gunOn; break;
+            case Weapons.WeaponKind.Pistol: pistolImage.color = gunOn; break;
+            case Weapons.WeaponKind.Rifle: rifleImage.color = gunOn; break;
+            case Weapons.WeaponKind.Shotgun: shotgunImage.color = gunOn; break;
+        }
     }
 }

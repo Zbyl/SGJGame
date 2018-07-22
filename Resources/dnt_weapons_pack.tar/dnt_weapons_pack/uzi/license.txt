@@ -1,0 +1,7 @@
+uzi.blend
+   author: farrer (DNTeam)
+   license: GPLv3+, CC-BY-SAv3+
+
+*.png
+   license: PD/CC0
+   source: http://www.wpclipart.com/armed_services/small_arms/guns_6/Uzi.png.html

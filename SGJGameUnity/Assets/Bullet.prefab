@@ -195,9 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0129ae1a1adb240a6d72df2d2b213a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletLifeTime: 2
-  bulletDamage: 10
-  bulletHit: {fileID: 1896799929087362, guid: d11257d95be3ab047bd0a367e3a2c221, type: 2}
+  isPlayerBullet: 0
 --- !u!212 &212434778848333604
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -232,7 +230,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 3dc4b5c2b77d07646a591ab5f5430315, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

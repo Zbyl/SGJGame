@@ -1,0 +1,7 @@
+beretta92.blend
+   author: farrer (DNTeam)
+   license: GPLv3+, CC-BY-SAv3
+
+*.png:
+   license: Public Domain
+   texture source: http://www.wpclipart.com/armed_services/small_arms/guns_1/Beretta_Model_92.png.html

@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1654667460243476}
+  m_IsPrefabAsset: 1
+--- !u!1 &1654667460243476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4215576453025982}
+  - component: {fileID: 114719910453121386}
+  m_Layer: 0
+  m_Name: Weapons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4215576453025982
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1654667460243476}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.264057, y: -1.189987, z: 0.48046875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114719910453121386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1654667460243476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b1bb939e491b094baa944c9d65355eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knifeRadius: 1
+  bulletSpeed: 50
+  bulletLifetime: 2
+  projectileHitEffect: {fileID: 1896799929087362, guid: d11257d95be3ab047bd0a367e3a2c221,
+    type: 2}
+  projectileHitSound: {fileID: 8300000, guid: 83545e865ed4f014e99872cfdee28869, type: 3}
+  shotgunDistance: 15
+  shotgunRayCount: 5
+  shotgunSpreadAngle: 15
+  shotgunShotTrail: {fileID: 120954433040224206, guid: 2e22975f17be6d145b1d948fb60220fd,
+    type: 2}
+  shotgunShotTrailDuration: 0.1
+  weaponDelays:
+  - 0.5
+  - 0.3
+  - 0.05
+  - 0.4
+  weaponReloadDelays:
+  - 0
+  - 0.3
+  - 0.5
+  - 0.3
+  weaponDamages:
+  - 25
+  - 5
+  - 5
+  - 10
+  weaponProjectiles:
+  - {fileID: 0}
+  - {fileID: 1201420165528388, guid: 56e6a12547380e840ab17d6c8b320633, type: 2}
+  - {fileID: 1201420165528388, guid: 56e6a12547380e840ab17d6c8b320633, type: 2}
+  - {fileID: 0}
+  weaponShootSounds:
+  - {fileID: 8300000, guid: 959bc507c9b607a4297846cb1cf0de83, type: 3}
+  - {fileID: 8300000, guid: 959bc507c9b607a4297846cb1cf0de83, type: 3}
+  - {fileID: 8300000, guid: 959bc507c9b607a4297846cb1cf0de83, type: 3}
+  - {fileID: 8300000, guid: 25cb6cdc77778254387b4fe2dc3c603e, type: 3}
+  reloadSound: {fileID: 8300000, guid: 15f01954528e70d45a42f19462d7d62b, type: 3}
+  reloadFailedSound: {fileID: 8300000, guid: fbca1232aa3f4d44ca3036ba6a8ad4bf, type: 3}

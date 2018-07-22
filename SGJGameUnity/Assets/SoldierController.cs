@@ -8,9 +8,7 @@ public class SoldierController : MonoBehaviour
     Animator bodyAnimator;
 
     protected new Rigidbody2D rigidbody;
-    public float strafeMultiplier = 130f;
     public float moveMultiplier = 130f;
-    public float strafeDisablesMoveTreshold = 0.05f;
     public float feetAnimSpeedMultiplier = 0.1f;
     public float bodyAnimSpeedMultiplier = 0.1f;
     public float lockStrafeTreshold = 0.1f;
@@ -117,7 +115,7 @@ public class SoldierController : MonoBehaviour
     bool shotFinished()
     {
         var weaponDelay = Weapons.instance.weaponDelays[(int)currentWeapon];
-        return shotAnimFinished;// && (Time.time - lastShot >= weaponDelay);
+        return shotAnimFinished && (Time.time - lastShot >= weaponDelay);
     }
 
     public void ReloadWeapon()
@@ -146,6 +144,16 @@ public class SoldierController : MonoBehaviour
         {
             Debug.Log("Reload failed.");
             Weapons.instance.playReloadFailedSound(currentWeapon, transform.position);
+
+            for (var i = 3; i >= 1; --i)
+            {
+                var totalBullets = weaponMagazineFills[i] + weaponBulletsOwned[i];
+                if (totalBullets > 0)
+                {
+                    switchWeapon((Weapons.WeaponKind)i);
+                    break;
+                }
+            }
             return;
         }
 
@@ -199,7 +207,7 @@ public class SoldierController : MonoBehaviour
         //Debug.Log("ShootCompleted");
         shotAnimFinished = true;
         var projectileSource = weaponProjectileSources[(int)currentWeapon];
-        Weapons.instance.Shoot(currentWeapon, projectileSource.position, currentDirection);
+        Weapons.instance.Shoot(gameObject, currentWeapon, projectileSource.position, currentDirection);
     }
 
     public void ShootFinished()

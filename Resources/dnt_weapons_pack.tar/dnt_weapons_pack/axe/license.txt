@@ -1,0 +1,6 @@
+axe.blend
+   author: farrer (DNTeam)
+   license: GPLv3+, CC-BY-SAv3+
+*.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: GPLv2+, CC-BY-SAv3+

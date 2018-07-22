@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSoldierController : SoldierController {
+    private float lastWeaponChange = 0;
+    public float weaponChangeDelay = 0.2f;
+
     new void Awake()
     {
         base.Awake();
@@ -14,8 +17,21 @@ public class PlayerSoldierController : SoldierController {
         base.Start();
     }
 
+    private void OnEnable()
+    {
+        FollowCamera.instance.target = transform;
+    }
+
+    private void OnDisable()
+    {
+        FollowCamera.instance.target = null;
+    }
+
     // Update is called once per frame
     void Update () {
+        if (SceneController.GameIsPaused)
+            return;
+
         UpdateAnims();
 
         float lockStrafeValue = Input.GetAxis("LockStrafe");
@@ -31,23 +47,42 @@ public class PlayerSoldierController : SoldierController {
             ReloadWeapon();
         }
 
+        if (Input.GetButton("Cheat"))
+        {
+            GetComponent<PlayerHitable>().health += 1;
+            for (var i = 1; i <= 3; ++i)
+            {
+                weaponBulletsOwned[i] += 1;
+            }
+        }
+
         float dpadX = Input.GetAxis("DPadX");
         float dpadY = Input.GetAxis("DPadY");
-        //Debug.Log(string.Format("dpadX={0} dpadY={1}", dpadX, dpadY));
 
-        if (dpadX < -0.5)
-            switchWeapon(Weapons.WeaponKind.Knife);
-        if (dpadX > 0.5)
-            switchWeapon(Weapons.WeaponKind.Shotgun);
-        if (dpadY > 0.5)
-            switchWeapon(Weapons.WeaponKind.Pistol);
-        if (dpadY < -0.5)
-            switchWeapon(Weapons.WeaponKind.Rifle);
+        if (Time.time - lastWeaponChange > weaponChangeDelay)
+        {
+            if (dpadY > 0.5)
+            {
+                lastWeaponChange = Time.time;
+                var weapon = ((int)currentWeapon + 3) % 4;
+                switchWeapon((Weapons.WeaponKind)weapon);
+            }
+
+            if (dpadY < -0.5)
+            {
+                lastWeaponChange = Time.time;
+                var weapon = ((int)currentWeapon + 1) % 4;
+                switchWeapon((Weapons.WeaponKind)weapon);
+            }
+        }
     }
 
     // Physics in FixedUpdate
     void FixedUpdate()
     {
+        if (SceneController.GameIsPaused)
+            return;
+
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
         float strafeX = Input.GetAxis("StrafeX");

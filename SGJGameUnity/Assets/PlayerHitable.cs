@@ -21,6 +21,8 @@ public class PlayerHitable : Hitable
     protected override void onDead()
     {
         gameObject.GetComponent<PlayerSoldierController>().enabled = false;
+        gameObject.GetComponent<Rigidbody2D>().simulated = false;
+        gameObject.GetComponent<Collider2D>().enabled = false;
         //gameObject.GetComponent<Collider2D>().enabled = false;
         bodyAnimator.Play("DeadAnimation");
         feetAnimator.Play("FeetIdleAnimation");

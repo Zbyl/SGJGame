@@ -34,9 +34,12 @@ public class SaveData : ResettableScriptableObject
 
     public KeyValuePairLists<bool> boolKeyValuePairLists = new KeyValuePairLists<bool> ();
     public KeyValuePairLists<int> intKeyValuePairLists = new KeyValuePairLists<int>();
+    public KeyValuePairLists<float> floatKeyValuePairLists = new KeyValuePairLists<float>();
     public KeyValuePairLists<string> stringKeyValuePairLists = new KeyValuePairLists<string>();
     public KeyValuePairLists<Vector3> vector3KeyValuePairLists = new KeyValuePairLists<Vector3>();
     public KeyValuePairLists<Quaternion> quaternionKeyValuePairLists = new KeyValuePairLists<Quaternion>();
+    public KeyValuePairLists<List<string>> stringListKeyValuePairLists = new KeyValuePairLists<List<string>>();
+    public KeyValuePairLists<List<Vector3>> vectorListKeyValuePairLists = new KeyValuePairLists<List<Vector3>>();
 
 
     public override void Reset()
@@ -77,9 +80,14 @@ public class SaveData : ResettableScriptableObject
     }
 
 
-    public void Save (string key, int value)
+    public void Save(string key, int value)
     {
         Save(intKeyValuePairLists, key, value);
+    }
+
+    public void Save(string key, float value)
+    {
+        Save(floatKeyValuePairLists, key, value);
     }
 
 
@@ -95,9 +103,19 @@ public class SaveData : ResettableScriptableObject
     }
 
 
-    public void Save (string key, Quaternion value)
+    public void Save(string key, Quaternion value)
     {
         Save(quaternionKeyValuePairLists, key, value);
+    }
+
+    public void Save(string key, List<string> value)
+    {
+        Save(stringListKeyValuePairLists, key, value);
+    }
+
+    public void Save(string key, List<Vector3> value)
+    {
+        Save(vectorListKeyValuePairLists, key, value);
     }
 
 
@@ -107,9 +125,14 @@ public class SaveData : ResettableScriptableObject
     }
 
 
-    public bool Load (string key, ref int value)
+    public bool Load(string key, ref int value)
     {
-        return Load (intKeyValuePairLists, key, ref value);
+        return Load(intKeyValuePairLists, key, ref value);
+    }
+
+    public bool Load(string key, ref float value)
+    {
+        return Load(floatKeyValuePairLists, key, ref value);
     }
 
 
@@ -128,5 +151,15 @@ public class SaveData : ResettableScriptableObject
     public bool Load (string key, ref Quaternion value)
     {
         return Load (quaternionKeyValuePairLists, key, ref value);
+    }
+
+    public bool Load(string key, ref List<string> value)
+    {
+        return Load(stringListKeyValuePairLists, key, ref value);
+    }
+
+    public bool Load(string key, ref List<Vector3> value)
+    {
+        return Load(vectorListKeyValuePairLists, key, ref value);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowCamera : MonoBehaviour {
+    public static FollowCamera instance;
 
     public Transform target;
     public float springFactor = 0.7f;
@@ -13,6 +14,16 @@ public class FollowCamera : MonoBehaviour {
     private Vector3 noCranePosition;
     private Vector3 cranePosition = Vector3.zero;
 
+    void Awake()
+    {
+        if (FollowCamera.instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        FollowCamera.instance = this;
+    }
+
     // Use this for initialization
     void Start () {
         noCranePosition = transform.position;
@@ -20,6 +31,11 @@ public class FollowCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+        if (target == null)
+        {
+            return;
+        }
+
         var distance = target.position - noCranePosition;
         if (distance.magnitude < 0.01f)
         {

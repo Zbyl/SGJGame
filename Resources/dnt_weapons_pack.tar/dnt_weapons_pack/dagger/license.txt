@@ -1,0 +1,8 @@
+dagger.blend
+   author: farrer (DNTeam)
+   license: GPLv3+, CC-BY-SAv3+
+adaga.png
+adaga_inv.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: CC0/PD
+   source: http://openclipart.org/detail/170829

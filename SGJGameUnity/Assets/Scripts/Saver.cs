@@ -3,6 +3,7 @@ using UnityEngine;
 public abstract class Saver : MonoBehaviour
 {
     public string uniqueIdentifier;
+    public string objectType;
     public SaveData saveData;
 
 
@@ -25,6 +26,7 @@ public abstract class Saver : MonoBehaviour
 
     private void OnEnable()
     {
+        //SaveController.instance.RegisterObject(gameObject, objectType, true);
         if (sceneController)
         {
             sceneController.Saving += Save;
@@ -35,6 +37,7 @@ public abstract class Saver : MonoBehaviour
 
     private void OnDisable()
     {
+        //SaveController.instance.RegisterObject(gameObject, objectType, false);
         if (sceneController)
         {
             sceneController.Saving -= Save;

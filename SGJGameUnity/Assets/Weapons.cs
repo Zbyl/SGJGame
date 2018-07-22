@@ -40,7 +40,6 @@ public class Weapons : MonoBehaviour
     public static int hitablesMask = enemiesMask | destroyablesMask;
     public static int allHitablesMask = enemiesMask | destroyablesMask | playerMask;
 
-
     void Awake()
     {
         if (Weapons.instance != null)
@@ -54,16 +53,14 @@ public class Weapons : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
-    public void Shoot(WeaponKind weapon, Vector3 source, Vector3 direction)
+    public void Shoot(GameObject shooter, WeaponKind weapon, Vector3 source, Vector3 direction)
     {
         var weaponShootSound = weaponShootSounds[(int)weapon];
         if (weaponShootSound != null)
@@ -71,14 +68,14 @@ public class Weapons : MonoBehaviour
 
         switch (weapon)
         {
-            case WeaponKind.Rifle: ShootRifle(weapon, source, direction); return;
-            case WeaponKind.Shotgun: ShootShotgun(weapon, source, direction); return;
-            case WeaponKind.Pistol: ShootRifle(weapon, source, direction); return;
-            case WeaponKind.Knife: ShootKnife(weapon, source, direction); return;
+            case WeaponKind.Knife: ShootKnife(shooter, weapon, source, direction); break;
+            case WeaponKind.Pistol: ShootRifle(weapon, source, direction); break;
+            case WeaponKind.Rifle: ShootRifle(weapon, source, direction); break;
+            case WeaponKind.Shotgun: ShootShotgun(weapon, source, direction); break;
         }
     }
 
-    public void ShootKnife(WeaponKind weapon, Vector3 source, Vector3 direction)
+    public void ShootKnife(GameObject shooter, WeaponKind weapon, Vector3 source, Vector3 direction)
     {
         Debug.Log("Knife shot.");
         // melee weapon - hit all enemies in radius.
@@ -97,6 +94,9 @@ public class Weapons : MonoBehaviour
                 Debug.LogWarning("Knife hit non-hittable: " + collider.gameObject.name);
                 continue;
             }
+
+            if (hitTarget.gameObject == shooter)
+                continue;
             projectileHitAction(weapon, collider.gameObject, hitPosition, -dirToSource.normalized);
         }
     }
@@ -176,6 +176,9 @@ public class Weapons : MonoBehaviour
 
         var soundsIdx = Random.Range(0, sounds.Length);
         var sound = sounds[soundsIdx];
+        if (sound == null)
+            return false;
+
         AudioSource.PlayClipAtPoint(sound, position);
         return true;
     }
@@ -187,6 +190,8 @@ public class Weapons : MonoBehaviour
 
         var objIdx = Random.Range(0, objects.Length);
         var obj = objects[objIdx];
+        if (obj == null)
+            return false;
 
         var rot = Quaternion.FromToRotation(Vector3.right, direction);
         GameObject injuryClone = Instantiate(obj, position, rot);

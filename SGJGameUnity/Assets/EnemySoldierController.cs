@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySoldierController : SoldierController
 {
+    public float visionDistance = 30.0f;
+    public float activationDistance = 20.0f;
     public float farDistance = 20.0f;
     public float mediumDistance = 10.0f;
     public float nearDistance = 3.0f;
@@ -60,6 +62,24 @@ public class EnemySoldierController : SoldierController
                 var vecToPlayer = (player.transform.position - transform.position);
                 var distToPlayer = vecToPlayer.magnitude;
                 var mediumPoint = player.transform.position - vecToPlayer.normalized * mediumDistance;
+
+                if (distToPlayer > visionDistance)
+                {
+                    yield return new WaitForSeconds(logicDelay);
+                    continue;
+                }
+
+                if (distToPlayer > activationDistance)
+                {
+                    // Raycast to determine if enemy can see the player.
+                    var hit = Physics2D.Raycast(transform.position, vecToPlayer.normalized, visionDistance);
+                    if ((hit.collider == null) || (hit.collider.gameObject != player))
+                    {
+                        yield return new WaitForSeconds(logicDelay);
+                        continue;
+                    }
+                }
+
                 if ((distToPlayer > farDistance) || (distToPlayer < nearDistance))
                 {
                     //Debug.Log("Moving to medium distance");
@@ -74,6 +94,10 @@ public class EnemySoldierController : SoldierController
                 var shootingUntil = Time.time + Random.Range(shootTimeMin, shootTimeMax);
                 while (Time.time < shootingUntil)
                 {
+                    // This is a super hack...
+                    if (SceneController.GameIsPaused)
+                        yield return new WaitForSeconds(logicDelay);
+
                     //Debug.Log("Shooting");
                     var vecToPlayer = (player.transform.position - transform.position);
                     var dirToPlayer = vecToPlayer.normalized;
@@ -154,6 +178,7 @@ public class EnemySoldierController : SoldierController
     {
         base.Start();
         scores = GameObject.FindGameObjectWithTag("Scores").GetComponent<ScoresScript>();
+        currentWeapon = (Weapons.WeaponKind)Random.Range(1, 4); // AI and bugs don't allow for Knives.
     }
 
     void OnEnable()
@@ -183,12 +208,14 @@ public class EnemySoldierController : SoldierController
             StopAi();
         }
         UpdateAnims();
-        Debug.DrawLine(transform.position, walkTarget, Color.yellow);
     }
 
     // Physics in FixedUpdate
     void FixedUpdate()
     {
+        if (SceneController.GameIsPaused)
+            return;
+
         FixedLerpDirection();
 
         var move = Vector3.zero;

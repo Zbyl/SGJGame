@@ -1,0 +1,9 @@
+sw39.blend
+   author: farrer (DNTeam)
+   license: GPLv3+, CC-BY-SA-v3+
+
+*.png
+   author: qubodup (Iwan Gabovitch) <qubodup@gmail.com>
+   license: GPLv2
+   base: http://commons.wikimedia.org/wiki/File:Smith_and_Wesson_model_39_IMG_3063.jpg
+   note: CeCILL is GPLv2-compatible

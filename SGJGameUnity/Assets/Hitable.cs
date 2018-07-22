@@ -16,6 +16,9 @@ public class Hitable : MonoBehaviour {
 
     public float health = 100.0f;
 
+    public GameObject[] lootDrops = { };
+    public GameObject[] deadBodies = { };
+
     public GameObject[] injuryEffects = { };
     public AudioClip[] injurySounds = { };
 
@@ -97,5 +100,7 @@ public class Hitable : MonoBehaviour {
     protected virtual void onDead()
     {
         Destroy(gameObject, destroyDelay);
+        Weapons.createRandomObject(lootDrops, transform.position, Vector3.right);
+        Weapons.createRandomObject(deadBodies, transform.position, Vector3.right);
     }
 }
