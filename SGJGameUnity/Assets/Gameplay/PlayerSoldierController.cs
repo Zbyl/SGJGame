@@ -56,6 +56,15 @@ public class PlayerSoldierController : SoldierController {
             }
         }
 
+        if (Input.GetButton("WeaponKnife"))
+            switchWeapon(Weapons.WeaponKind.Knife);
+        if (Input.GetButton("WeaponPistol"))
+            switchWeapon(Weapons.WeaponKind.Pistol);
+        if (Input.GetButton("WeaponRifle"))
+            switchWeapon(Weapons.WeaponKind.Rifle);
+        if (Input.GetButton("WeaponShotgun"))
+            switchWeapon(Weapons.WeaponKind.Shotgun);
+
         float dpadX = Input.GetAxis("DPadX");
         float dpadY = Input.GetAxis("DPadY");
 
