@@ -771,7 +771,7 @@ TextureImporter:
       213: 21300510
     second: BgForest_255
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -788,10 +788,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -801,8 +803,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -830,6 +832,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -857,6 +861,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 1
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -6296,9 +6312,265 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      BgForest_253: 21300506
+      BgForest_116: 21300232
+      BgForest_57: 21300114
+      BgForest_130: 21300260
+      BgForest_209: 21300418
+      BgForest_237: 21300474
+      BgForest_117: 21300234
+      BgForest_219: 21300438
+      BgForest_23: 21300046
+      BgForest_232: 21300464
+      BgForest_35: 21300070
+      BgForest_45: 21300090
+      BgForest_134: 21300268
+      BgForest_189: 21300378
+      BgForest_67: 21300134
+      BgForest_90: 21300180
+      BgForest_229: 21300458
+      BgForest_112: 21300224
+      BgForest_199: 21300398
+      BgForest_3: 21300006
+      BgForest_250: 21300500
+      BgForest_113: 21300226
+      BgForest_191: 21300382
+      BgForest_200: 21300400
+      BgForest_235: 21300470
+      BgForest_236: 21300472
+      BgForest_66: 21300132
+      BgForest_160: 21300320
+      BgForest_54: 21300108
+      BgForest_254: 21300508
+      BgForest_25: 21300050
+      BgForest_211: 21300422
+      BgForest_122: 21300244
+      BgForest_56: 21300112
+      BgForest_241: 21300482
+      BgForest_249: 21300498
+      BgForest_93: 21300186
+      BgForest_176: 21300352
+      BgForest_74: 21300148
+      BgForest_162: 21300324
+      BgForest_201: 21300402
+      BgForest_228: 21300456
+      BgForest_9: 21300018
+      BgForest_62: 21300124
+      BgForest_231: 21300462
+      BgForest_114: 21300228
+      BgForest_30: 21300060
+      BgForest_159: 21300318
+      BgForest_163: 21300326
+      BgForest_204: 21300408
+      BgForest_158: 21300316
+      BgForest_127: 21300254
+      BgForest_136: 21300272
+      BgForest_242: 21300484
+      BgForest_133: 21300266
+      BgForest_124: 21300248
+      BgForest_216: 21300432
+      BgForest_84: 21300168
+      BgForest_183: 21300366
+      BgForest_217: 21300434
+      BgForest_120: 21300240
+      BgForest_238: 21300476
+      BgForest_131: 21300262
+      BgForest_99: 21300198
+      BgForest_11: 21300022
+      BgForest_132: 21300264
+      BgForest_37: 21300074
+      BgForest_82: 21300164
+      BgForest_140: 21300280
+      BgForest_143: 21300286
+      BgForest_181: 21300362
+      BgForest_78: 21300156
+      BgForest_96: 21300192
+      BgForest_5: 21300010
+      BgForest_98: 21300196
+      BgForest_198: 21300396
+      BgForest_31: 21300062
+      BgForest_73: 21300146
+      BgForest_102: 21300204
+      BgForest_148: 21300296
+      BgForest_108: 21300216
+      BgForest_49: 21300098
+      BgForest_203: 21300406
+      BgForest_182: 21300364
+      BgForest_153: 21300306
+      BgForest_125: 21300250
+      BgForest_173: 21300346
+      BgForest_2: 21300004
+      BgForest_6: 21300012
+      BgForest_1: 21300002
+      BgForest_194: 21300388
+      BgForest_13: 21300026
+      BgForest_252: 21300504
+      BgForest_144: 21300288
+      BgForest_33: 21300066
+      BgForest_142: 21300284
+      BgForest_169: 21300338
+      BgForest_147: 21300294
+      BgForest_106: 21300212
+      BgForest_53: 21300106
+      BgForest_137: 21300274
+      BgForest_28: 21300056
+      BgForest_170: 21300340
+      BgForest_91: 21300182
+      BgForest_69: 21300138
+      BgForest_157: 21300314
+      BgForest_180: 21300360
+      BgForest_48: 21300096
+      BgForest_88: 21300176
+      BgForest_145: 21300290
+      BgForest_85: 21300170
+      BgForest_21: 21300042
+      BgForest_156: 21300312
+      BgForest_71: 21300142
+      BgForest_27: 21300054
+      BgForest_223: 21300446
+      BgForest_195: 21300390
+      BgForest_109: 21300218
+      BgForest_14: 21300028
+      BgForest_126: 21300252
+      BgForest_70: 21300140
+      BgForest_210: 21300420
+      BgForest_110: 21300220
+      BgForest_12: 21300024
+      BgForest_72: 21300144
+      BgForest_221: 21300442
+      BgForest_22: 21300044
+      BgForest_40: 21300080
+      BgForest_149: 21300298
+      BgForest_141: 21300282
+      BgForest_146: 21300292
+      BgForest_89: 21300178
+      BgForest_178: 21300356
+      BgForest_105: 21300210
+      BgForest_97: 21300194
+      BgForest_34: 21300068
+      BgForest_43: 21300086
+      BgForest_61: 21300122
+      BgForest_39: 21300078
+      BgForest_118: 21300236
+      BgForest_165: 21300330
+      BgForest_186: 21300372
+      BgForest_8: 21300016
+      BgForest_215: 21300430
+      BgForest_212: 21300424
+      BgForest_101: 21300202
+      BgForest_80: 21300160
+      BgForest_41: 21300082
+      BgForest_87: 21300174
+      BgForest_234: 21300468
+      BgForest_179: 21300358
+      BgForest_38: 21300076
+      BgForest_164: 21300328
+      BgForest_123: 21300246
+      BgForest_63: 21300126
+      BgForest_244: 21300488
+      BgForest_174: 21300348
+      BgForest_24: 21300048
+      BgForest_155: 21300310
+      BgForest_227: 21300454
+      BgForest_226: 21300452
+      BgForest_75: 21300150
+      BgForest_100: 21300200
+      BgForest_18: 21300036
+      BgForest_205: 21300410
+      BgForest_213: 21300426
+      BgForest_222: 21300444
+      BgForest_65: 21300130
+      BgForest_115: 21300230
+      BgForest_15: 21300030
+      BgForest_233: 21300466
+      BgForest_58: 21300116
+      BgForest_129: 21300258
+      BgForest_50: 21300100
+      BgForest_139: 21300278
+      BgForest_171: 21300342
+      BgForest_240: 21300480
+      BgForest_4: 21300008
+      BgForest_119: 21300238
+      BgForest_95: 21300190
+      BgForest_190: 21300380
+      BgForest_64: 21300128
+      BgForest_47: 21300094
+      BgForest_7: 21300014
+      BgForest_177: 21300354
+      BgForest_46: 21300092
+      BgForest_192: 21300384
+      BgForest_26: 21300052
+      BgForest_76: 21300152
+      BgForest_202: 21300404
+      BgForest_245: 21300490
+      BgForest_52: 21300104
+      BgForest_251: 21300502
+      BgForest_206: 21300412
+      BgForest_218: 21300436
+      BgForest_92: 21300184
+      BgForest_10: 21300020
+      BgForest_185: 21300370
+      BgForest_60: 21300120
+      BgForest_86: 21300172
+      BgForest_187: 21300374
+      BgForest_188: 21300376
+      BgForest_196: 21300392
+      BgForest_128: 21300256
+      BgForest_207: 21300414
+      BgForest_239: 21300478
+      BgForest_29: 21300058
+      BgForest_103: 21300206
+      BgForest_255: 21300510
+      BgForest_247: 21300494
+      BgForest_225: 21300450
+      BgForest_107: 21300214
+      BgForest_111: 21300222
+      BgForest_224: 21300448
+      BgForest_193: 21300386
+      BgForest_151: 21300302
+      BgForest_42: 21300084
+      BgForest_154: 21300308
+      BgForest_44: 21300088
+      BgForest_138: 21300276
+      BgForest_16: 21300032
+      BgForest_55: 21300110
+      BgForest_152: 21300304
+      BgForest_208: 21300416
+      BgForest_51: 21300102
+      BgForest_150: 21300300
+      BgForest_168: 21300336
+      BgForest_184: 21300368
+      BgForest_20: 21300040
+      BgForest_19: 21300038
+      BgForest_0: 21300000
+      BgForest_167: 21300334
+      BgForest_243: 21300486
+      BgForest_32: 21300064
+      BgForest_104: 21300208
+      BgForest_36: 21300072
+      BgForest_77: 21300154
+      BgForest_197: 21300394
+      BgForest_135: 21300270
+      BgForest_17: 21300034
+      BgForest_94: 21300188
+      BgForest_220: 21300440
+      BgForest_121: 21300242
+      BgForest_59: 21300118
+      BgForest_230: 21300460
+      BgForest_166: 21300332
+      BgForest_172: 21300344
+      BgForest_83: 21300166
+      BgForest_248: 21300496
+      BgForest_161: 21300322
+      BgForest_175: 21300350
+      BgForest_68: 21300136
+      BgForest_79: 21300158
+      BgForest_214: 21300428
+      BgForest_246: 21300492
+      BgForest_81: 21300162
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

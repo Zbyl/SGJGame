@@ -537,7 +537,7 @@ TextureImporter:
       213: 21300354
     second: RobinHoodAnims_177
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -554,10 +554,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -567,8 +569,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -596,6 +598,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -611,6 +615,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 1
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -4372,9 +4400,187 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      RobinHoodAnims_124: 21300248
+      RobinHoodAnims_55: 21300110
+      RobinHoodAnims_162: 21300324
+      RobinHoodAnims_106: 21300212
+      RobinHoodAnims_67: 21300134
+      RobinHoodAnims_103: 21300206
+      RobinHoodAnims_11: 21300022
+      RobinHoodAnims_150: 21300300
+      RobinHoodAnims_159: 21300318
+      RobinHoodAnims_46: 21300092
+      RobinHoodAnims_141: 21300282
+      RobinHoodAnims_60: 21300120
+      RobinHoodAnims_75: 21300150
+      RobinHoodAnims_76: 21300152
+      RobinHoodAnims_131: 21300262
+      RobinHoodAnims_79: 21300158
+      RobinHoodAnims_62: 21300124
+      RobinHoodAnims_23: 21300046
+      RobinHoodAnims_36: 21300072
+      RobinHoodAnims_155: 21300310
+      RobinHoodAnims_33: 21300066
+      RobinHoodAnims_50: 21300100
+      RobinHoodAnims_134: 21300268
+      RobinHoodAnims_93: 21300186
+      RobinHoodAnims_143: 21300286
+      RobinHoodAnims_166: 21300332
+      RobinHoodAnims_163: 21300326
+      RobinHoodAnims_90: 21300180
+      RobinHoodAnims_176: 21300352
+      RobinHoodAnims_84: 21300168
+      RobinHoodAnims_142: 21300284
+      RobinHoodAnims_78: 21300156
+      RobinHoodAnims_25: 21300050
+      RobinHoodAnims_43: 21300086
+      RobinHoodAnims_31: 21300062
+      RobinHoodAnims_86: 21300172
+      RobinHoodAnims_83: 21300166
+      RobinHoodAnims_65: 21300130
+      RobinHoodAnims_135: 21300270
+      RobinHoodAnims_54: 21300108
+      RobinHoodAnims_99: 21300198
+      RobinHoodAnims_109: 21300218
+      RobinHoodAnims_69: 21300138
+      RobinHoodAnims_139: 21300278
+      RobinHoodAnims_156: 21300312
+      RobinHoodAnims_171: 21300342
+      RobinHoodAnims_22: 21300044
+      RobinHoodAnims_82: 21300164
+      RobinHoodAnims_153: 21300306
+      RobinHoodAnims_107: 21300214
+      RobinHoodAnims_146: 21300292
+      RobinHoodAnims_13: 21300026
+      RobinHoodAnims_137: 21300274
+      RobinHoodAnims_157: 21300314
+      RobinHoodAnims_161: 21300322
+      RobinHoodAnims_30: 21300060
+      RobinHoodAnims_2: 21300004
+      RobinHoodAnims_136: 21300272
+      RobinHoodAnims_28: 21300056
+      RobinHoodAnims_0: 21300000
+      RobinHoodAnims_45: 21300090
+      RobinHoodAnims_5: 21300010
+      RobinHoodAnims_144: 21300288
+      RobinHoodAnims_119: 21300238
+      RobinHoodAnims_70: 21300140
+      RobinHoodAnims_147: 21300294
+      RobinHoodAnims_114: 21300228
+      RobinHoodAnims_102: 21300204
+      RobinHoodAnims_39: 21300078
+      RobinHoodAnims_19: 21300038
+      RobinHoodAnims_138: 21300276
+      RobinHoodAnims_123: 21300246
+      RobinHoodAnims_51: 21300102
+      RobinHoodAnims_74: 21300148
+      RobinHoodAnims_34: 21300068
+      RobinHoodAnims_167: 21300334
+      RobinHoodAnims_132: 21300264
+      RobinHoodAnims_4: 21300008
+      RobinHoodAnims_173: 21300346
+      RobinHoodAnims_64: 21300128
+      RobinHoodAnims_95: 21300190
+      RobinHoodAnims_24: 21300048
+      RobinHoodAnims_170: 21300340
+      RobinHoodAnims_148: 21300296
+      RobinHoodAnims_66: 21300132
+      RobinHoodAnims_126: 21300252
+      RobinHoodAnims_80: 21300160
+      RobinHoodAnims_1: 21300002
+      RobinHoodAnims_120: 21300240
+      RobinHoodAnims_98: 21300196
+      RobinHoodAnims_177: 21300354
+      RobinHoodAnims_42: 21300084
+      RobinHoodAnims_6: 21300012
+      RobinHoodAnims_96: 21300192
+      RobinHoodAnims_14: 21300028
+      RobinHoodAnims_145: 21300290
+      RobinHoodAnims_41: 21300082
+      RobinHoodAnims_29: 21300058
+      RobinHoodAnims_97: 21300194
+      RobinHoodAnims_35: 21300070
+      RobinHoodAnims_9: 21300018
+      RobinHoodAnims_174: 21300348
+      RobinHoodAnims_27: 21300054
+      RobinHoodAnims_8: 21300016
+      RobinHoodAnims_12: 21300024
+      RobinHoodAnims_21: 21300042
+      RobinHoodAnims_7: 21300014
+      RobinHoodAnims_58: 21300116
+      RobinHoodAnims_152: 21300304
+      RobinHoodAnims_116: 21300232
+      RobinHoodAnims_100: 21300200
+      RobinHoodAnims_165: 21300330
+      RobinHoodAnims_133: 21300266
+      RobinHoodAnims_88: 21300176
+      RobinHoodAnims_101: 21300202
+      RobinHoodAnims_168: 21300336
+      RobinHoodAnims_10: 21300020
+      RobinHoodAnims_108: 21300216
+      RobinHoodAnims_160: 21300320
+      RobinHoodAnims_20: 21300040
+      RobinHoodAnims_85: 21300170
+      RobinHoodAnims_125: 21300250
+      RobinHoodAnims_118: 21300236
+      RobinHoodAnims_127: 21300254
+      RobinHoodAnims_175: 21300350
+      RobinHoodAnims_26: 21300052
+      RobinHoodAnims_115: 21300230
+      RobinHoodAnims_129: 21300258
+      RobinHoodAnims_15: 21300030
+      RobinHoodAnims_57: 21300114
+      RobinHoodAnims_121: 21300242
+      RobinHoodAnims_18: 21300036
+      RobinHoodAnims_105: 21300210
+      RobinHoodAnims_40: 21300080
+      RobinHoodAnims_49: 21300098
+      RobinHoodAnims_113: 21300226
+      RobinHoodAnims_140: 21300280
+      RobinHoodAnims_3: 21300006
+      RobinHoodAnims_117: 21300234
+      RobinHoodAnims_112: 21300224
+      RobinHoodAnims_151: 21300302
+      RobinHoodAnims_72: 21300144
+      RobinHoodAnims_169: 21300338
+      RobinHoodAnims_130: 21300260
+      RobinHoodAnims_104: 21300208
+      RobinHoodAnims_111: 21300222
+      RobinHoodAnims_48: 21300096
+      RobinHoodAnims_59: 21300118
+      RobinHoodAnims_52: 21300104
+      RobinHoodAnims_56: 21300112
+      RobinHoodAnims_37: 21300074
+      RobinHoodAnims_44: 21300088
+      RobinHoodAnims_91: 21300182
+      RobinHoodAnims_149: 21300298
+      RobinHoodAnims_94: 21300188
+      RobinHoodAnims_164: 21300328
+      RobinHoodAnims_92: 21300184
+      RobinHoodAnims_16: 21300032
+      RobinHoodAnims_122: 21300244
+      RobinHoodAnims_71: 21300142
+      RobinHoodAnims_73: 21300146
+      RobinHoodAnims_81: 21300162
+      RobinHoodAnims_63: 21300126
+      RobinHoodAnims_172: 21300344
+      RobinHoodAnims_68: 21300136
+      RobinHoodAnims_154: 21300308
+      RobinHoodAnims_87: 21300174
+      RobinHoodAnims_38: 21300076
+      RobinHoodAnims_53: 21300106
+      RobinHoodAnims_128: 21300256
+      RobinHoodAnims_47: 21300094
+      RobinHoodAnims_32: 21300064
+      RobinHoodAnims_61: 21300122
+      RobinHoodAnims_158: 21300316
+      RobinHoodAnims_17: 21300034
+      RobinHoodAnims_89: 21300178
+      RobinHoodAnims_110: 21300220
+      RobinHoodAnims_77: 21300154
   spritePackingTag: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
